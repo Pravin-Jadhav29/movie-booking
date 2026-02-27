@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+    <h2>🎉 Booking Confirmed!</h2>
+    <p>You booked:</p>
+
+    <h4>
+        {% for seat in seats %}
+            {{ seat }} 
+        {% endfor %}
+    </h4>
+
+    <a href="{% url 'my_bookings' %}" class="btn btn-primary mt-3">
+        View My Bookings
+    </a>
+</div>
+
+{% endblock %}

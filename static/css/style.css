@@ -1,0 +1,147 @@
+/* ===== Global Styling ===== */
+
+body {
+    background-color: #111;
+    color: white;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #141E30, #243B55);
+}
+
+.navbar-brand {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Movie Card */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    object-fit: cover;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #e50914;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #b20710;
+}
+
+/* Show Card */
+.show-card {
+    border-left: 5px solid #e50914;
+}
+/* Seat Grid */
+/* .seat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.seat {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.available {
+    background-color: #28a745;
+    color: white;
+}
+
+.available:hover {
+    background-color: #218838;
+}
+
+.booked {
+    background-color: #dc3545;
+    color: white;
+    cursor: not-allowed;
+}
+.seat input:checked + span {
+    background-color: #ffc107;
+}
+
+.seat.available {
+    cursor: pointer;
+}
+
+.seat.available:hover {
+    transform: scale(1.1);
+} */
+ /* Screen */
+.screen {
+    width: 60%;
+    margin: auto;
+    padding: 10px;
+    background: #ddd;
+    border-radius: 50px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.seat-layout {
+    margin-top: 30px;
+}
+
+.seat-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.seat {
+    margin: 5px;
+}
+
+.seat input {
+    display: none;
+}
+
+.seat span {
+    display: block;
+    width: 45px;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.available span {
+    background-color: #28a745;
+    color: white;
+}
+
+.booked {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    width: 45px;
+}
+
+.seat input:checked + span {
+    background-color: orange;
+    color: black;
+}
+
+.aisle {
+    width: 40px;
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">My Bookings</h2>
+
+    {% if bookings %}
+        <table class="table table-bordered">
+            <tr>
+                <th>Movie</th>
+                <th>Seat</th>
+                <th>Show Time</th>
+            </tr>
+
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.show.movie.title }}</td>
+                <td>{{ booking.seat_number }}</td>
+                <td>{{ booking.show.show_time }}</td>
+                <td>
+    <a href="{% url 'cancel_booking' booking.id %}"
+       class="btn btn-danger btn-sm">
+       Cancel
+    </a>
+</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    {% else %}
+        <p>No bookings yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{ movie.image.url }}" class="img-fluid rounded shadow">
+    </div>
+
+    <div class="col-md-8">
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.description }}</p>
+
+        <h4 class="mt-4">Available Shows</h4>
+
+        {% for show in shows %}
+        <div class="card p-3 mb-3 shadow-sm show-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ show.theatre.name }}</strong><br>
+                    {{ show.show_time }}<br>
+                    ₹{{ show.price }}
+                </div>
+
+                <a href="{% url 'select_seat' show.id %}" class="btn btn-primary">
+                    Book Tickets
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No shows available.</p>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

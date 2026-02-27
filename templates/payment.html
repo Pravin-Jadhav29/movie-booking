@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 text-center">
+
+    <h2>Payment Page</h2>
+
+    <p><strong>Movie:</strong> {{ show.movie.title }}</p>
+    <p><strong>Seats:</strong> {{ selected_seats|join:", " }}</p>
+    <p><strong>Total:</strong> ₹{{ total_price }}</p>
+
+    <form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">
+        Pay Now
+    </button>
+</form>
+
+</div>
+
+{% endblock %}
