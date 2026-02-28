@@ -101,7 +101,7 @@ def ticket_page(request):
 
     booking = Booking.objects.filter(
         user=request.user
-    ).order_by('-booked_at').first()
+    ).order_by('-id').first()
 
     if not booking:
         return redirect('home')
@@ -109,7 +109,6 @@ def ticket_page(request):
     return render(request, 'ticket.html', {
         'booking': booking
     })
-
 
 # ❌ Cancel Booking
 @login_required

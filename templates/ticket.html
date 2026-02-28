@@ -1,68 +1,62 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-
 <div class="container mt-5">
+
     <div class="card shadow p-4">
 
         <h2 class="text-center text-danger mb-4">
             🎟 Movie Ticket
         </h2>
-        <div class="text-center mb-3">
-    <img src="{{ show.movie.image.url }}"
-         alt="Movie Poster"
-         style="width:200px; border-radius:10px;">
-         </div>
 
-        <p><strong>Booking ID:</strong> #{{ booking_id }}</p>
+        <div class="row">
 
-        <hr>
+            <!-- Poster -->
+            <div class="col-md-4 text-center">
+                {% if booking.show.movie.image %}
+    <img src="{{ booking.show.movie.image.url }}"
+         class="img-fluid rounded"
+         style="max-height:300px;">
+{% else %}
+    <p>No Image Available</p>
+{% endif %}
+            </div>
 
-        <p><strong>Movie:</strong> {{ show.movie.title }}</p>
+            <!-- Details -->
+            <div class="col-md-8">
 
-        <p><strong>Theatre:</strong> {{ show.theatre.name }}</p>
+                <p><strong>Booking ID:</strong> #{{ booking.id }}</p>
 
-        <p><strong>Location:</strong> {{ show.theatre.location }}</p>
+                <p><strong>Movie:</strong>
+                    {{ booking.show.movie.title }}
+                </p>
 
-        <p><strong>Show Time:</strong> {{ show.show_time }}</p>
+                <p><strong>Theatre:</strong>
+                    {{ booking.show.theatre.name }}
+                </p>
 
-        <p><strong>Seats:</strong>
-            {% for seat in selected_seats %}
-                {{ seat }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </p>
+                <p><strong>Location:</strong>
+                    {{ booking.show.theatre.location }}
+                </p>
 
-        <p><strong>Total Paid:</strong> ₹{{ total_price }}</p>
+                <p><strong>Show Time:</strong>
+                    {{ booking.show.show_time }}
+                </p>
 
-        <p><strong>User:</strong> {{ request.user.username }}</p>
+                <p><strong>Seat:</strong>
+                    {{ booking.seat_number }}
+                </p>
+
+                <p><strong>Total Paid:</strong>
+                    ₹{{ booking.price }}
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
+
 </div>
-
-
-
-<style>
-.ticket-card {
-    width: 420px;
-    background: #fff;
-    border: 2px dashed #dc3545;
-    border-radius: 15px;
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
-}
-
-.poster {
-    width: 180px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-@media print {
-    .navbar, .btn {
-        display: none;
-    }
-}
-</style>
 
 {% endblock %}
