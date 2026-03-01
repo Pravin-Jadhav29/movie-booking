@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-danger">📊 Admin Revenue Dashboard</h2>
+
+    <div class="card p-3 mb-4 shadow">
+        <h5>Total Bookings: {{ total_bookings }}</h5>
+        <h5>Total Revenue: ₹{{ total_revenue }}</h5>
+    </div>
+
+    <!-- Chart Container -->
+    <div class="card p-4 shadow">
+        <h5 class="mb-3">Revenue by Movie</h5>
+        <canvas id="movieChart"></canvas>
+    </div>
+
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('movieChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ movie_labels|safe }},
+            datasets: [{
+                label: 'Revenue (₹)',
+                data: {{ movie_totals|safe }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

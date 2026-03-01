@@ -11,5 +11,6 @@ urlpatterns = [
     path('cancel-booking/<int:booking_id>/',
          views.cancel_booking,
          name='cancel_booking'),
+         path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
     
 ]

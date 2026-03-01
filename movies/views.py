@@ -4,7 +4,8 @@ from django.db.models import Sum
 from .models import Movie, Show, Theatre
 from bookings.models import Booking
 import random
-
+from .models import Theatre
+import json
 
 # 🏠 Home Page
 def home(request):
@@ -138,25 +139,16 @@ def my_bookings(request):
 @login_required
 def admin_dashboard(request):
 
-    # 👑 SUPER ADMIN → sees everything
+    # SUPER ADMIN
     if request.user.is_superuser:
         bookings = Booking.objects.all()
-
-    # 🏢 THEATRE ADMIN → sees only their theatre
     else:
-        theatre = Theatre.objects.filter(
-            admin=request.user
-        ).first()
-
+        theatre = Theatre.objects.filter(admin=request.user).first()
         if not theatre:
             return redirect('home')
-
-        bookings = Booking.objects.filter(
-            show__theatre=theatre
-        )
+        bookings = Booking.objects.filter(show__theatre=theatre)
 
     total_bookings = bookings.count()
-
     total_revenue = bookings.aggregate(
         total=Sum('price')
     )['total'] or 0
@@ -167,8 +159,15 @@ def admin_dashboard(request):
         total=Sum('price')
     )
 
-    return render(request, 'admin_dashboard.html', {
+    # Prepare data for chart
+    movie_labels = [item['show__movie__title'] for item in revenue_by_movie]
+    movie_totals = [float(item['total']) for item in revenue_by_movie]
+
+    context = {
         'total_bookings': total_bookings,
         'total_revenue': total_revenue,
-        'revenue_by_movie': revenue_by_movie,
-    })
+        'movie_labels': json.dumps(movie_labels),
+        'movie_totals': json.dumps(movie_totals),
+    }
+
+    return render(request, 'admin_dashboard.html', context)
